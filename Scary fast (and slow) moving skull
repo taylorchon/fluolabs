@@ -1,0 +1,92 @@
+import fluo
+
+xOrg = 0
+yOrg = 0
+
+no = 1
+rightX, leftX = 0, 0 
+topY, bottomY = 0, 0
+p = 15
+xSpeed = 1
+ySpeed = 1
+def setup():
+  size(800,800);
+  background(0,0,0); 
+  ySpeed = random(0, 1) 
+
+def draw(): 
+    global xOrg, yOrg, rightX, xSpeed, leftX, topY, bottomY, ySpeed
+    background(0)
+    
+    translate(xOrg, yOrg)
+    rightX = 16*p + xOrg
+    leftX = 3*p + xOrg
+    topY = p + yOrg
+    bottomY = 15*p + yOrg
+    
+    fluo.showGrid()
+    display()
+    
+    # print("rightX: " + str(rightX) + " leftX: " + str(leftX))
+    # print("xSpeed:" + str(xSpeed))
+    # print("xOrg: " + str(xOrg))
+   
+    # check boundary
+    if (rightX > width or leftX < 0):
+        xSpeed *= -1
+      
+    if (bottomY > height or topY < 0):
+        ySpeed *= -1
+            
+    xOrg += xSpeed
+    yOrg += ySpeed
+
+
+def display():
+    noStroke()
+    fill(188,13,168) 
+    myRect(4*p,5*p,p,p)     # top most
+    myRect(3*p,6*p,2*p,p)   # left most
+    myRect(5*p,7*p,p,p)
+    myRect(7*p,7*p,5*p,2*p)
+    myRect(13*p,7*p,p,p)
+    myRect(14*p,6*p,2*p,p)  # right most
+    myRect(14*p,5*p,p,p)
+    myRect(6*p,8*p,p,3*p)
+    myRect(12*p,8*p,p,3*p)
+    myRect(9*p,9*p,p,p)
+    myRect(8*p,10*p,3*p,p)
+    myRect(6*p,11*p,3*p,p)
+    myRect(10*p,11*p,3*p,p)
+    myRect(5*p,12*p,p,p)
+    myRect(7*p,12*p,5*p,p)
+    myRect(13*p,12*p,p,p)
+    myRect(3*p,13*p,2*p,p)
+    myRect(4*p,14*p,p,p)      # bottom most
+    myRect(14*p,13*p,2*p,p)
+    myRect(14*p,14*p,p,p)
+    myRect(7*p,13*p,p,p)
+    myRect(9*p,13*p,p,p)
+    myRect(11*p,13*p,p,p) 
+    
+def myRect(x, y, w, h):
+    global no
+    rect(x, y, w, h)
+    # fill(255)
+    # text(str(no), x+ w/2, y+h)
+    # fill(188,13,168)
+    no += 1 
+    
+def keyPressed():
+    global xSpeed, ySpeed
+    if (keyCode== 37):
+        if (xSpeed > 0):
+            xSpeed += 1
+        else:
+            xSpeed -= 1
+    if (keyCode== 39):
+        if (xSpeed > 0):
+            xSpeed += 1
+        else:
+            xSpeed -= 1
+    
